@@ -1,0 +1,39 @@
+{
+    "welcomeFile": "/index.html",
+    "authenticationMethod": "route",
+    "routes": [
+      {
+        "source": "^/IPROVIDER_BACKEND/(.*)$",
+        "target": "$1",
+        "destination": "IPROVIDER_BACKEND",
+        "authenticationType": "xsuaa",
+        "csrfProtection": false
+      },
+      {
+        "source": "^/GCP_REPOSITORY/(.*)$",
+        "target": "$1",
+        "destination": "GCP_REPOSITORY",
+        "authenticationType": "none",
+        "csrfProtection": false
+      },
+      {
+        "source": "^/resources/(.*)$",
+        "target": "/resources/$1",
+        "authenticationType": "none",
+        "destination": "ui5"
+      },
+      {
+        "source": "^/test-resources/(.*)$",
+        "target": "/test-resources/$1",
+        "authenticationType": "none",
+        "destination": "ui5"
+      },
+      {
+        "source": "^(.*)$",
+        "target": "$1",
+        "service": "html5-apps-repo-rt",
+        "authenticationType": "xsuaa"
+      }
+    ]
+  }
+  

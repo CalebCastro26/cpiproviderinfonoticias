@@ -1,0 +1,128 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"  class="sapUiSizeCompact" 
+controllerName="cp.iprovider.info.noticia.controller.InformacionNoticia" 
+xmlns:m="sap.m" 
+xmlns="sap.m"
+xmlns:u="sap.ui.unified">
+    <App id="App">
+        <m:Page showHeader="false" title="Información de noticias" showFooter="true" showNavButton="false">
+        <m:content>
+            <m:IconTabBar id="idIconTabBar" expandable="false" expanded="true" 
+            			  applyContentPadding="false" backgroundDesign="Solid"
+                          upperCase="false" visible="true" selectedKey="Ok" 
+                          items="{TipoInfoNoticias>/}" 
+                          select="handleIconTabBarSelect">
+                <m:items>
+                    <m:IconTabFilter icon="sap-icon://{TipoInfoNoticias>iconText}" iconColor="Positive" 
+                    				 count=""
+                                     design="Vertical" showAll="false" textDirection="Inherit"
+                                     enabled="true" visible="true" iconDensityAware="false"
+                                     text="{TipoInfoNoticias>descripcion}" 
+                                     key="{TipoInfoNoticias>idTipoInformacionNoticia}">
+                        <m:content/>
+                    </m:IconTabFilter>
+                </m:items>
+                <m:content/>
+            </m:IconTabBar>
+            <m:Table id="idTableInfoNoticia" width="100%" noDataText="No data" 
+				            		 mode="SingleSelectLeft" showSeparators="All"
+				                     growing="true" growingThreshold="20" 
+				                     growingScrollToLoad="true" 
+				                     items="{InfoNoticiaByTipo>/}">
+					                <m:infoToolbar>
+					                    <m:Toolbar width="100%" height="auto" design="Auto" 
+					                    		   visible="false" enabled="true">
+					                        <m:content>
+					                            <m:Label text="Label" design="Standard" 
+					                            		 width="100%" required="false"
+					                                     textAlign="Begin" textDirection="Inherit"/>
+					                        </m:content>
+					                    </m:Toolbar>
+					                </m:infoToolbar>
+                					<m:headerToolbar>
+                						<m:OverflowToolbar>
+                								<m:Button text="" type="Default" icon="sap-icon://newspaper" 
+				                				iconFirst="true" width="auto" enabled="true" 
+				                				visible="true" iconDensityAware="false"/>
+				                				<m:Label text="{i18n>GLOBAL.titulo}"/>
+                								<m:ToolbarSpacer width=""/>
+                								
+                								<m:Button type="Transparent" 
+                									text="{i18n>GLOBAL.button.label.add}"
+                									icon="sap-icon://add" press="_onButtonPressAdd"/>
+                								<m:Button type="Transparent" 
+                									text="{i18n>GLOBAL.button.label.edit}"
+                									icon="sap-icon://edit" press="_onButtonPressEdit"/>
+                								<m:Button 
+                									text="{i18n>GLOBAL.button.label.delete}"
+                									icon="sap-icon://delete" press="_onButtonPressDelete"/>
+                						</m:OverflowToolbar>
+                					</m:headerToolbar>
+				                	<m:columns>
+					                    <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet"
+					                              demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					                        <m:header>
+					                            <m:Text text="{i18n>GLOBAL.table.header.titulo}" width="auto" maxLines="1"
+					                                    wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+					                        </m:header>
+					                        <m:footer/>
+					                    </m:Column>
+					                    <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet"
+					                              demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					                        <m:header>
+					                            <m:Text text="{i18n>GLOBAL.table.header.contenido}" width="auto" maxLines="1"
+					                                    wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+					                        </m:header>
+					                        <m:footer/>
+					                    </m:Column>
+					                    <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true"
+					                              popinDisplay="Inline" mergeDuplicates="false">
+					                        <m:header>
+					                            <m:Text text="{i18n>GLOBAL.table.header.adjunto}" width="auto" maxLines="1"
+					                                    wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+					                        </m:header>
+					                        <m:footer/>
+					                    </m:Column>
+					                    <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet"
+					                              demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+					                        <m:header>
+					                            <m:Text text="{i18n>GLOBAL.table.header.cargarArchivo}" width="auto" maxLines="1"
+					                                    wrapping="false" textAlign="Begin" textDirection="Inherit"/>
+					                        </m:header>
+					                        <m:footer/>
+					                    </m:Column>
+				                </m:columns>
+					                <m:items>
+					                    <m:ColumnListItem type="Active">
+					                        <m:cells>
+					                            <m:Text text="{InfoNoticiaByTipo>titulo}" width="auto" 
+					                            		maxLines="5" wrapping="true" textAlign="Begin" 
+					                            		textDirection="Inherit" />
+					                            <m:Text text="{InfoNoticiaByTipo>contenido}" width="auto" 
+					                            		maxLines="5" wrapping="true"
+					                                    textAlign="Begin" textDirection="Inherit" 
+					                                    />
+					                            <m:Link 
+					                            		text="{InfoNoticiaByTipo>archivoNombre}"
+					                                    textAlign="Begin" width="auto"
+					                                    wrapping="true" enabled="true"
+					                                    visible="true" emphasized="false" subtle="false" press="downFile"/>
+					                            <u:FileUploader id="file" name="file" uploadOnChange="true"
+					                                tooltip="Cargar tu archivo" maximumFileSize="52"
+					                                buttonOnly="true" sendXHR="true"
+					                                buttonText ="..."
+					                                change="uploadComplete"
+					                                uploadStart="uploadStart"
+					                                icon="sap-icon://upload">
+					                            </u:FileUploader>
+					                        </m:cells>
+					                    </m:ColumnListItem>
+					                </m:items>
+					            </m:Table>
+             </m:content>
+        <m:footer/>
+        <m:headerContent/>
+        <m:subHeader/>
+        <m:customHeader/>
+    </m:Page>
+    </App>
+</mvc:View>
